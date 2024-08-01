@@ -37,9 +37,9 @@ def fetch_weather():
                 wind_direction = all_data.get('wind_cdir_full')
                 city = all_data.get('city_name')
                 weather_condition=all_data['weather']['description']
-            # Create label to display weather info
-            weather_label = tk.Label(window, text=f'CITY NAME: {city}\n\nTEMPERATURE: {temp} °C\n\nWIND SPEED: {wind_speed} m/s\n\nWIND DIRECTION: {wind_direction}\n\nWEATHER CONDITION: {weather_condition}', wraplength=250, justify="left" , font='timesnewroman 10 bold' , bg='#6897bb' , fg='white' , relief='sunken' , borderwidth=4)
-            weather_label.grid(row=3, column=0, columnspan=2, padx=10, pady=5 , sticky='w' )
+            # Update the existing label with weather info
+            weather_label.config(text=f'CITY NAME: {city}\n\nTEMPERATURE: {temp} °C\n\nWIND SPEED: {wind_speed} m/s\n\nWIND DIRECTION: {wind_direction}\n\nWEATHER CONDITION: {weather_condition}')
+
         else:
             messagebox.showerror(title='Error', message='50 searches per day limit reached...\nTry again next day')
 
@@ -78,6 +78,10 @@ long_entry.grid(row=1, column=1, padx=10, pady=5 , sticky='ew')
 # Create fetch weather button
 fetch_button = tk.Button(window, text="Fetch Weather", command=fetch_weather, font='timesnewroman 10 bold' , bg='#003366' , fg='white' , relief='raised', borderwidth=5)
 fetch_button.grid(row=2, column=0, columnspan=2, padx=10, pady=5)
+
+# Create an empty label for displaying weather info
+weather_label = tk.Label(window, text='', wraplength=250, justify="left", font='timesnewroman 10 bold', bg='#6897bb', fg='white', relief='sunken', borderwidth=4)
+weather_label.grid(row=3, column=0, columnspan=2, padx=10, pady=5, sticky='w')
 
 # Run the tkinter event loop
 window.mainloop()
